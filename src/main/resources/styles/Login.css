@@ -1,0 +1,47 @@
+/* CSS for app */
+
+#btnExit {
+    -fx-graphic: url("../images/login-bg-bt-exit.png");
+    -fx-background-color: transparent;
+    -fx-opacity: 1;
+}
+
+#btnLogin {
+    -fx-graphic: url("../images/login-bg-bt-enter.png");
+    -fx-background-color: transparent;
+    -fx-opacity: 1;
+}
+
+#paneUsername {
+    -fx-background-image: url("../images/login-pane-bg.png");
+
+
+}
+
+#panePassword {
+    -fx-background-image: url("../images/login-pane-bg.png");
+}
+
+#txtUsername {
+    -fx-width: 131px;
+    -fx-height: 37px;
+    -fx-font-size: 26px;
+    -fx-font-family: PingFang SC;
+    -fx-font-weight: 500;
+    -fx-line-height: 37px;
+    -fx-color: #999999;
+    -fx-letter-spacing: 10px;
+    -fx-opacity: 1;
+}
+
+#txtPassword {
+    -fx-width: 131px;
+    -fx-height: 37px;
+    -fx-font-size: 26px;
+    -fx-font-family: PingFang SC;
+    -fx-font-weight: 500;
+    -fx-line-height: 37px;
+    -fx-color: #999999;
+    -fx-letter-spacing: 10px;
+    -fx-opacity: 1;
+}

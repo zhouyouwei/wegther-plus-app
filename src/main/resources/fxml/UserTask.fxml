@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane prefHeight="650.0" prefWidth="1104.0" stylesheets="@../styles/UserTask.css" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.codetreatise.controller.UserTaskController">
+    <top>
+        <Pane fx:id="paneTop" layoutX="374.0" layoutY="306.0" prefHeight="63.0" prefWidth="333.0">
+            <children>
+                <DatePicker fx:id="txtCalendar" editable="false" layoutX="832.0" layoutY="15.0" prefHeight="30.0" prefWidth="245.0" promptText="配送日期"   />
+                <Label layoutX="755.0" layoutY="20.0" text="配送日期:" textFill="#f8f7f7">
+                    <font>
+                        <Font size="15.0" />
+                    </font>
+                </Label>
+            </children>
+        </Pane>
+    </top>
+    <center>
+        <VBox alignment="TOP_RIGHT" prefHeight="571.0" prefWidth="692.0" BorderPane.alignment="CENTER">
+            <children>
+                <TabPane>
+                    <Tab fx:id="tab1" text="已分拣" />
+                    <Tab fx:id="tab2" text="待分拣" />
+                </TabPane>
+                <HBox alignment="TOP_RIGHT" prefHeight="41.0" prefWidth="640.0" />
+                <TableView fx:id="userTaskTableView" prefHeight="300.0" prefWidth="679.0" tableMenuButtonVisible="true">
+                    <columns>
+                        <TableColumn fx:id="colId" maxWidth="400.0" prefWidth="125.0" text="序号" />
+                        <TableColumn fx:id="colTradeNo" maxWidth="400.0" prefWidth="405.0" text="分拣任务号" />
+                        <TableColumn fx:id="colItemCount" maxWidth="400.0" prefWidth="142.0" text="客户数量" />
+                        <TableColumn fx:id="colCollectDate" maxWidth="400.0" prefWidth="335.0" text="配送日期" />
+                    </columns>
+                </TableView>
+            </children>
+        </VBox>
+    </center>
+</BorderPane>

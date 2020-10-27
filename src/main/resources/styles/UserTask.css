@@ -1,0 +1,19 @@
+/* CSS for app */
+
+.btnGreen {
+    -fx-background-color: #3cbc53;
+}
+
+.background {
+    -fx-background-color: DODGERBLUE;
+}
+
+#paneTop {
+    -fx-width: 1024px;
+    -fx-height: 90px;
+    -fx-background-color: linear-gradient(#6AC75B 0%, #51A544 100%);
+}
+
+#txtCalendar {
+    -fx-background-image: url("../images/task-calendar.png");
+}
