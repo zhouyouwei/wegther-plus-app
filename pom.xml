@@ -47,6 +47,14 @@
             <artifactId>fastjson</artifactId>
             <version>1.2.39</version>
         </dependency>
+        <!--串口读信息-->
+        <dependency>
+            <groupId>com.rxtx</groupId>
+            <artifactId>rxtx-comm</artifactId>
+            <version>1.0.0</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/lib/RXTXcomm.jar</systemPath>
+        </dependency>
     </dependencies>
     <build>
         <plugins>

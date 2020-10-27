@@ -1,1 +1,0 @@
-# wegther-plus-app
