@@ -13,7 +13,10 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.scene.control.Tab;
+import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Controller;
@@ -32,7 +35,7 @@ import javafx.scene.control.TableView;
 public class UserTaskController implements Initializable {
 
     @FXML
-    private TableView<UserTask> userTaskTableView;
+    private TableView<UserTask> userTaskSortedTableView;
 
     @FXML
     private TableColumn<UserTask, String> colId;
@@ -45,7 +48,6 @@ public class UserTaskController implements Initializable {
 
     @FXML
     private TableColumn<UserTask, String> colCollectDate;
-
 
     private ObservableList<UserTask> userTaskTableViewData = FXCollections.observableArrayList();
 
@@ -98,7 +100,7 @@ public class UserTaskController implements Initializable {
 
         colCollectDate.setCellValueFactory(cellData -> cellData.getValue().getColCollectDate());
 
-        userTaskTableView.setItems(userTaskTableViewData);
+        userTaskSortedTableView.setItems(userTaskTableViewData);
 
         System.out.println("UserLoginInfo:" + UserLoginInfo.accessToken);
 
@@ -129,21 +131,22 @@ public class UserTaskController implements Initializable {
                             (String) resultJSONArray.getJSONObject(i).get("collect_date"));
 
                     userTaskTableViewData.add(userTask);
+
+                    userTaskSortedTableView.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                        @Override
+                        public void handle(MouseEvent event) {
+                            if (event.getButton().equals(MouseButton.PRIMARY)
+                                    && event.getClickCount() == 1
+                            ) {
+
+                                System.out.println("userTaskSortedTableView.event:" + event);
+
+                            }
+                        }
+                    });
+
                 }
             }
         });
-
-        setColumnProperties();
-
-        loadUserDetails();
-    }
-
-    private void setColumnProperties() {
-
-    }
-
-    private void loadUserDetails() {
-
-
     }
 }
