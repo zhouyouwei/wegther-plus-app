@@ -3,8 +3,6 @@ package com.codetreatise.controller;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
 
@@ -15,10 +13,10 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.control.Tab;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Controller;
-import com.codetreatise.bean.User;
 import com.codetreatise.config.StageManager;
 import com.codetreatise.service.BusinessService;
 import com.codetreatise.view.FxmlView;
@@ -26,15 +24,9 @@ import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.geometry.Pos;
-import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
-import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.util.Callback;
 
 @Controller
 public class UserTaskController implements Initializable {
@@ -56,6 +48,13 @@ public class UserTaskController implements Initializable {
 
 
     private ObservableList<UserTask> userTaskTableViewData = FXCollections.observableArrayList();
+
+    @FXML
+    private Tab tab1;
+
+    @FXML
+    private Tab tab2;
+
 
     @Lazy
     @Autowired
@@ -99,7 +98,6 @@ public class UserTaskController implements Initializable {
 
         colCollectDate.setCellValueFactory(cellData -> cellData.getValue().getColCollectDate());
 
-        //绑定数据到TableView
         userTaskTableView.setItems(userTaskTableViewData);
 
         System.out.println("UserLoginInfo:" + UserLoginInfo.accessToken);
@@ -121,6 +119,7 @@ public class UserTaskController implements Initializable {
                 System.out.println(respones);
 
                 JSONArray resultJSONArray = (JSONArray) respones.get("data");
+                userTaskTableViewData.clear();
 
                 for (int i = 0; i < resultJSONArray.size(); i++) {
 
@@ -130,7 +129,6 @@ public class UserTaskController implements Initializable {
                             (String) resultJSONArray.getJSONObject(i).get("collect_date"));
 
                     userTaskTableViewData.add(userTask);
-
                 }
             }
         });
