@@ -1,44 +1,54 @@
 package com.codetreatise.bean;
 
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+
 public class UserTask {
 
-    private String colId;
+    private StringProperty colId;
 
-    private String colTradeNo;
+    private StringProperty colTradeNo;
 
-    private Integer colItemCount;
+    private StringProperty colItemCount;
 
-    private String colCollectDate;
+    private StringProperty colCollectDate;
 
-    public String getColId() {
+    public UserTask(String colId, String colTradeNo, String colItemCount, String colCollectDate) {
+        this.colId = new SimpleStringProperty(colId);
+        this.colTradeNo = new SimpleStringProperty(colTradeNo);
+        this.colItemCount = new SimpleStringProperty(colItemCount);
+        this.colCollectDate = new SimpleStringProperty(colCollectDate);
+    }
+
+    public StringProperty getColId() {
         return colId;
     }
 
     public void setColId(String colId) {
-        this.colId = colId;
+        this.colId.set(colId);
     }
 
-    public String getColTradeNo() {
+    public StringProperty getColTradeNo() {
         return colTradeNo;
     }
 
     public void setColTradeNo(String colTradeNo) {
-        this.colTradeNo = colTradeNo;
+        this.colTradeNo.set(colTradeNo);
     }
 
-    public Integer getColItemCount() {
+    public StringProperty getColItemCount() {
         return colItemCount;
     }
 
-    public void setColItemCount(Integer colItemCount) {
-        this.colItemCount = colItemCount;
+    public void setColItemCount(String colItemCount) {
+        this.colItemCount.set(colItemCount);
     }
 
-    public String getColCollectDate() {
+    public StringProperty getColCollectDate() {
         return colCollectDate;
     }
 
     public void setColCollectDate(String colCollectDate) {
-        this.colCollectDate = colCollectDate;
+        this.colCollectDate.set(colCollectDate);
     }
 }

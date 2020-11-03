@@ -33,7 +33,7 @@
                     <Tab fx:id="tab2" text="待分拣" />
                 </TabPane>
                 <HBox alignment="TOP_RIGHT" prefHeight="41.0" prefWidth="640.0" />
-                <TableView fx:id="userTaskTableView" prefHeight="300.0" prefWidth="679.0" tableMenuButtonVisible="true">
+                <TableView fx:id="userTaskTableView" prefHeight="300.0" prefWidth="679.0">
                     <columns>
                         <TableColumn fx:id="colId" maxWidth="400.0" prefWidth="125.0" text="序号" />
                         <TableColumn fx:id="colTradeNo" maxWidth="400.0" prefWidth="405.0" text="分拣任务号" />

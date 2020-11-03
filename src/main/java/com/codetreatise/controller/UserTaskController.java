@@ -43,16 +43,19 @@ public class UserTaskController implements Initializable {
     private TableView<UserTask> userTaskTableView;
 
     @FXML
-    private TableColumn<UserTask, Integer> colId;
+    private TableColumn<UserTask, String> colId;
 
     @FXML
     private TableColumn<UserTask, String> colTradeNo;
 
     @FXML
-    private TableColumn<UserTask, Integer> colItemCount;
+    private TableColumn<UserTask, String> colItemCount;
 
     @FXML
     private TableColumn<UserTask, String> colCollectDate;
+
+
+    private ObservableList<UserTask> userTaskTableViewData = FXCollections.observableArrayList();
 
     @Lazy
     @Autowired
@@ -63,9 +66,6 @@ public class UserTaskController implements Initializable {
 
     @Autowired
     private BusinessService businessService;
-
-    private ObservableList<UserTask> userTaskList = FXCollections.observableArrayList();
-
 
     @FXML
     private void exit(ActionEvent event) {
@@ -87,8 +87,20 @@ public class UserTaskController implements Initializable {
 
     }
 
+    @FXML
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
+        colId.setCellValueFactory(cellData -> cellData.getValue().getColId());
+
+        colTradeNo.setCellValueFactory(cellData -> cellData.getValue().getColTradeNo());
+
+        colItemCount.setCellValueFactory(cellData -> cellData.getValue().getColItemCount());
+
+        colCollectDate.setCellValueFactory(cellData -> cellData.getValue().getColCollectDate());
+
+        //绑定数据到TableView
+        userTaskTableView.setItems(userTaskTableViewData);
 
         System.out.println("UserLoginInfo:" + UserLoginInfo.accessToken);
 
@@ -108,23 +120,18 @@ public class UserTaskController implements Initializable {
                 System.out.println("response:");
                 System.out.println(respones);
 
-                JSONArray resultJSONArray =  (JSONArray)respones.get("data");
+                JSONArray resultJSONArray = (JSONArray) respones.get("data");
 
-                List<UserTask> resultList = new ArrayList(resultJSONArray.size());
+                for (int i = 0; i < resultJSONArray.size(); i++) {
 
-                for(int i=0;i<resultJSONArray.size();i++) {
+                    UserTask userTask = new UserTask((String) resultJSONArray.getJSONObject(i).get("id"),
+                            (String) resultJSONArray.getJSONObject(i).get("trade_no"),
+                            (String) resultJSONArray.getJSONObject(i).get("item_count"),
+                            (String) resultJSONArray.getJSONObject(i).get("collect_date"));
 
-                    UserTask userTask = new UserTask();
+                    userTaskTableViewData.add(userTask);
 
-                    userTask.setColId((String)resultJSONArray.getJSONObject(i).get("id"));
-
-                    userTask.setColTradeNo((String)resultJSONArray.getJSONObject(i).get("trade_no"));
-
-                    resultList.add(userTask);
                 }
-
-                userTaskList.clear();
-                userTaskList.addAll(resultList);
             }
         });
 
@@ -136,55 +143,6 @@ public class UserTaskController implements Initializable {
     private void setColumnProperties() {
 
     }
-
-
-    Callback<TableColumn<User, Boolean>, TableCell<User, Boolean>> cellFactory =
-            new Callback<TableColumn<User, Boolean>, TableCell<User, Boolean>>() {
-                @Override
-                public TableCell<User, Boolean> call(final TableColumn<User, Boolean> param) {
-                    final TableCell<User, Boolean> cell = new TableCell<User, Boolean>() {
-                        Image imgEdit = new Image(getClass().getResourceAsStream("/images/edit.png"));
-                        final Button btnEdit = new Button();
-
-                        @Override
-                        public void updateItem(Boolean check, boolean empty) {
-
-                            super.updateItem(check, empty);
-
-                            if (empty) {
-
-                                setGraphic(null);
-                                setText(null);
-
-                            } else {
-
-                                btnEdit.setOnAction(e -> {
-                                    User user = getTableView().getItems().get(getIndex());
-                                    updateUser(user);
-                                });
-
-                                btnEdit.setStyle("-fx-background-color: transparent;");
-                                ImageView iv = new ImageView();
-                                iv.setImage(imgEdit);
-                                iv.setPreserveRatio(true);
-                                iv.setSmooth(true);
-                                iv.setCache(true);
-                                btnEdit.setGraphic(iv);
-
-                                setGraphic(btnEdit);
-                                setAlignment(Pos.CENTER);
-                                setText(null);
-                            }
-
-                        }
-
-                        private void updateUser(User user) {
-
-                        }
-                    };
-                    return cell;
-                }
-            };
 
     private void loadUserDetails() {
 
