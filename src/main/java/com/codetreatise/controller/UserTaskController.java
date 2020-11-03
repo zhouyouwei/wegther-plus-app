@@ -15,8 +15,10 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.scene.control.Tab;
+import javafx.scene.control.TableRow;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
+import javafx.util.Callback;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Controller;
@@ -132,16 +134,24 @@ public class UserTaskController implements Initializable {
 
                     userTaskTableViewData.add(userTask);
 
-                    userTaskSortedTableView.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                    userTaskSortedTableView.setRowFactory(new Callback<TableView<UserTask>, TableRow<UserTask>>() {
                         @Override
-                        public void handle(MouseEvent event) {
-                            if (event.getButton().equals(MouseButton.PRIMARY)
-                                    && event.getClickCount() == 1
-                            ) {
+                        public TableRow<UserTask> call(TableView<UserTask> param) {
+                            TableRow<UserTask> row = new TableRow<UserTask>();
+                            row.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                                @Override
+                                public void handle(MouseEvent event) {
+                                    if (event.getClickCount() == 1 && (!row.isEmpty())) {
+                                        UserTask userTask = row.getItem();
+                                        System.out.println("userTaskSortedTableView.event:" + userTask);
 
-                                System.out.println("userTaskSortedTableView.event:" + event);
+                                        UserLoginInfo.userSelectTaskId=userTask.getColId().get();
+                                        stageManager.switchScene(FxmlView.USEROPERAT);
 
-                            }
+                                    }
+                                }
+                            });
+                            return row;
                         }
                     });
 

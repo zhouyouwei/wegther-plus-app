@@ -51,4 +51,14 @@ public class UserTask {
     public void setColCollectDate(String colCollectDate) {
         this.colCollectDate.set(colCollectDate);
     }
+
+    @Override
+    public String toString() {
+        return "UserTask{" +
+                "colId=" + colId +
+                ", colTradeNo=" + colTradeNo +
+                ", colItemCount=" + colItemCount +
+                ", colCollectDate=" + colCollectDate +
+                '}';
+    }
 }
